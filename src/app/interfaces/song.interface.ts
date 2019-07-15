@@ -1,3 +1,4 @@
+
 export class Song {
   name: string;
   artist: string;
@@ -5,3 +6,5 @@ export class Song {
   coverUrl: string;
   releaseDate: Date;
 }
+
+

@@ -11,6 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule, MatSortModule } from '@angular/material';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { RemoveSong, AddSong } from './state/actions/song.actions';
+import { SongState } from './state/states/song.state';
+import { SongService } from './services/song.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,11 +31,15 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     MatTableModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgxsModule.forRoot([SongState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
 
   ],
   providers: [
-    FileService
+    FileService,
+    SongService
 ],
   bootstrap: [AppComponent]
 })
