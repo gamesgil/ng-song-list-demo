@@ -1,0 +1,7 @@
+<p>
+  song-list works!
+</p>
+
+<app-song-table *ngIf="db as songs" [data]="songs"></app-song-table>
+<span *ngIf="db as songs">{{ songs | json }}</span>
+<button (click)="load()">Load</button>

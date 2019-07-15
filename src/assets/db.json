@@ -1,0 +1,37 @@
+[
+  {
+    "name": "overpowered",
+    "artist": "Róisín Murphy",
+    "genre": "pop",
+    "coverUrl": "https://www.youtube.com/watch?v=ysIl0qMK1ps",
+    "releaseDate": "Feb 21, 2019"
+  },
+  {
+    "name": "young jesus",
+    "artist": "Logic",
+    "genre": "rap",
+    "coverUrl": "https://www.youtube.com/watch?v=O601PVTd0g8",
+    "releaseDate": "Oct 19, 2015"
+  },
+  {
+    "name": "I changed My mind",
+    "artist": "Quannum",
+    "genre": "hip-hop",
+    "coverUrl": "https://www.youtube.com/watch?v=xGoE8GUbNO8",
+    "releaseDate": "Dec 1, 2009"
+  },
+  {
+    "name": "The Hand That Feeds",
+    "artist": "Nine Inch Nails",
+    "genre": "alternative",
+    "coverUrl": "https://www.youtube.com/watch?v=xwhBRJStz7w",
+    "releaseDate": "Jun 16, 2009"
+  },
+  {
+    "name": "Know your product",
+    "artist": "The Saints",
+    "genre": "rock",
+    "coverUrl": "https://www.youtube.com/watch?v=h9M3b9lh-7s",
+    "releaseDate": "Apr 7, 2010"
+  }
+]

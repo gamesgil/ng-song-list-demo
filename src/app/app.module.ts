@@ -1,18 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FileService } from './services/file.service';
+import { SongListComponent } from './components/song-list/song-list.component';
+import { SongTableComponent } from './components/song-list/song-table/song-table.component';
+import {MatTableModule} from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule, MatSortModule } from '@angular/material';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SongListComponent,
+    SongTableComponent,
+    CapitalizePipe,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatSortModule
+
   ],
-  providers: [],
+  providers: [
+    FileService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
