@@ -1,6 +1,6 @@
 import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {Song} from '../../interfaces/song.interface';
-import { AddSong, RemoveSong } from '../actions/song.actions';
+import { AddSong, RemoveSong, GetSongs } from '../actions/song.actions';
 
 export class SongStateModel {
   songs: Song[];
@@ -34,6 +34,11 @@ export class SongState {
     patchState({
       songs: getState().songs.filter(song => song.name !== payload)
     });
+  }
+
+  @Action(GetSongs)
+  get({getState}: StateContext<SongStateModel>) {
+    return getState();
   }
 }
 

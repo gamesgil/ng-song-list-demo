@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoaderInterceptor } from './services/http.interceptor';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'music';
 
+  constructor(public loaderService: LoaderService) {
+
+  }
 }

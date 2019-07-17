@@ -2,7 +2,7 @@
   song-list works!
 </p>
 
-<app-song-table #table [data]="list"></app-song-table>
+<app-song-table #table [data]="list" (removeSong)="onRemoveSong($event)"></app-song-table>
 <button (click)="load()">Load</button>
 
 <button (click)="addSong()">Add Dummy</button>

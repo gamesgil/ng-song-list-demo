@@ -15,3 +15,10 @@ export class RemoveSong {
 
   }
 }
+
+export class GetSongs {
+  static readonly type = '[SONG] Get Songs';
+
+  constructor() {}
+}
+

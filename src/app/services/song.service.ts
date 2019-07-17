@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Song } from '../interfaces/song.interface';
-import { AddSong } from '../state/actions/song.actions';
+import { AddSong, RemoveSong } from '../state/actions/song.actions';
 import { Observable } from 'rxjs';
 import { SongState } from '../state/states/song.state';
 // import {  } from '../state/actions/song.actions';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { FileService } from './file.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class SongService {
@@ -16,7 +17,7 @@ export class SongService {
 
   @Select(SongState) songs$: Observable<any>;
 
-  constructor(private store: Store, private fileService: FileService) {
+  constructor(private store: Store, private fileService: FileService, private snackbar: MatSnackBar) {
   }
 
   addSong({name, artist, genre, coverUrl, releaseDate}) {
@@ -28,15 +29,21 @@ export class SongService {
     song.coverUrl = coverUrl;
     song.releaseDate = releaseDate;
 
-    this.store.dispatch(new AddSong(song));
-  }
+    const numOfSongs = this.store.snapshot().songs.songs.length;
 
-  songExists(name: string) {
-    console.log(this.songs$);
+    this.store.dispatch(new AddSong(song)).subscribe(val => {
+      if (numOfSongs === val.songs.songs.length) {
+        this.snackbar.open('Song exists!', null, {duration: 1000});
+      }
+    });
   }
 
   loadSongs() {
     this.fileService.loadDb().subscribe(songs => songs.forEach(song => this.addSong(song)));
+  }
+
+  removeSong(name) {
+    this.store.dispatch(new RemoveSong(name));
   }
 
 }

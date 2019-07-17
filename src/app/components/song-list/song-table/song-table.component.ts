@@ -1,44 +1,40 @@
 import {
-  AfterViewInit,
   Component,
   OnInit,
   ViewChild,
-  Input
+  Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material';
-import { SongTableDataSource } from './song-table-datasource';
 import { Song } from 'src/app/interfaces/song.interface';
-import { Observable } from 'rxjs';
-import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-song-table',
   templateUrl: './song-table.component.html',
   styleUrls: ['./song-table.component.css']
 })
-export class SongTableComponent implements AfterViewInit, OnInit {
+export class SongTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<Song>;
 
+  @Output() removeSong: EventEmitter<string> = new EventEmitter();
+
   dataSource: MatTableDataSource<Song> = new MatTableDataSource();
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['name', 'artist', 'genre', 'coverUrl', 'releaseDate'];
+  displayedColumns = ['name', 'artist', 'genre', 'coverUrl', 'releaseDate', 'delete', 'edit'];
 
   @Input() set data(data: Song[]) {
     this.dataSource.data = data;
   }
 
-  constructor(private songService: SongService) {}
+  constructor() {}
 
   ngOnInit() {
-
   }
 
-  ngAfterViewInit() {
-    /* this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource; */
+  onRemoveSong(name) {
+    this.removeSong.emit(name);
   }
 }
