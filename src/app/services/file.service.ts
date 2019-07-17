@@ -12,6 +12,6 @@ export class FileService {
   constructor(private http: HttpClient) { }
 
   loadDb() {
-    this.http.get<Song[]>('../../assets/db.json').subscribe(songs => this.db = songs);
+    return this.http.get<Song[]>('../../assets/db.json');
   }
 }

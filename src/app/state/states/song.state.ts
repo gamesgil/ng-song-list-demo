@@ -22,9 +22,11 @@ export class SongState {
   add({getState, patchState}: StateContext<SongStateModel>, {payload}: AddSong) {
     const state = getState();
 
-    patchState({
-      songs: [...state.songs, payload]
-    });
+    if (state.songs && !state.songs.find(song => song.name === payload.name)) {
+      patchState({
+        songs: [...state.songs, payload]
+      });
+    }
   }
 
   @Action(RemoveSong)

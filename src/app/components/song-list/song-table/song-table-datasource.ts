@@ -14,10 +14,8 @@ export class SongTableDataSource extends DataSource<Song> {
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor(data: Song[]) {
+  constructor() {
     super();
-
-    this.data = data;
   }
 
   /**
@@ -35,6 +33,7 @@ export class SongTableDataSource extends DataSource<Song> {
     ];
 
     return merge(...dataMutations).pipe(map(() => {
+      console.log('merge', this.data)
       return this.getPagedData(this.getSortedData([...this.data]));
     }));
   }

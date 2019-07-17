@@ -14,7 +14,6 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { RemoveSong, AddSong } from './state/actions/song.actions';
 import { SongState } from './state/states/song.state';
 import { SongService } from './services/song.service';
 
@@ -23,7 +22,7 @@ import { SongService } from './services/song.service';
     AppComponent,
     SongListComponent,
     SongTableComponent,
-    CapitalizePipe,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
