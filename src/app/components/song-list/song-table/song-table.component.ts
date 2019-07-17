@@ -20,6 +20,7 @@ export class SongTableComponent implements OnInit {
   @ViewChild(MatTable, { static: false }) table: MatTable<Song>;
 
   @Output() removeSong: EventEmitter<string> = new EventEmitter();
+  @Output() editSong: EventEmitter<string> = new EventEmitter();
 
   dataSource: MatTableDataSource<Song> = new MatTableDataSource();
 
@@ -36,5 +37,9 @@ export class SongTableComponent implements OnInit {
 
   onRemoveSong(name) {
     this.removeSong.emit(name);
+  }
+
+  onEditSong(name) {
+    this.editSong.emit(name);
   }
 }

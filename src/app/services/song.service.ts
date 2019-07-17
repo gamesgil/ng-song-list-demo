@@ -15,6 +15,8 @@ export class SongService {
 
   songs: Song[] = [];
 
+  readonly genres = ['pop', 'rap', 'hip-hop', 'alternative', 'rock'];
+
   @Select(SongState) songs$: Observable<any>;
 
   constructor(private store: Store, private fileService: FileService, private snackbar: MatSnackBar) {

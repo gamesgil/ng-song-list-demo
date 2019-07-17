@@ -4,6 +4,7 @@ import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/interfaces/song.interface';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-song-list',
@@ -19,8 +20,6 @@ export class SongListComponent implements OnInit {
     this.songService.songs$.subscribe(songs => {
       this.list = songs.songs;
     });
-
-
   }
 
   load() {
@@ -43,6 +42,17 @@ export class SongListComponent implements OnInit {
       }
     });
   }
+
+  onEditSong(name) {
+    const dialogRef = this.dialogService.open(EditDialogComponent, {
+      width: '250px',
+      data: {name: 'test name'}
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+
+    });
+  }
 }
 
 @Component({
@@ -63,4 +73,81 @@ export class ConfirmDeleteComponent {
     onNoClick() {
       this.dialogRef.close({result: true});
     }
+}
+
+@Component({
+  selector: 'app-edit-dialog',
+  template: `
+    <h1>EDIT</h1>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Name" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Artist" [formControl]="artist" required>
+        <mat-error *ngIf="artist.invalid">{{getArtistErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="URL" [formControl]="coverUrl" required>
+        <mat-error *ngIf="coverUrl.invalid">{{getUrlErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select">
+          <mat-option *ngFor="let option of songService.genres; let i = index" value="{{i}}">{{ option }} / {{ i }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-button mat-raised-button color="primary">Confirm</button>
+
+    </div>
+  `,
+  styles: [`
+    .example-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .example-container > * {
+      width: 100%;
+    }
+  `]
+})
+
+export class EditDialogComponent implements OnInit {
+  name = new FormControl('', [Validators.required, Validators.nullValidator]);
+  artist = new FormControl('', [Validators.required, Validators.nullValidator]);
+  coverUrl = new FormControl('', [Validators.required, Validators.nullValidator,
+    Validators.pattern(
+      /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm)]
+      );
+
+  constructor(
+    public songService: SongService,
+    public dialogRef: MatDialogRef<EditDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  ngOnInit() { }
+
+  getNameErrorMessage() {
+    return this.name.hasError('required') ? 'Name required' : '';
+  }
+
+  getArtistErrorMessage() {
+    return this.artist.hasError('required') ? 'Artist required' : '';
+  }
+
+  getUrlErrorMessage() {
+    return this.coverUrl.hasError('required') ? 'URL Required' :
+      this.coverUrl.hasError('pattern') ? 'Not a valid URL' : '';
+  }
 }
