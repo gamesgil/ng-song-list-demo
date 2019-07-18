@@ -1,5 +1,8 @@
 <app-song-table #table [data]="list" (removeSong)="onRemoveSong($event)" (editSong)="onEditSong($event)"></app-song-table>
-<button (click)="load()">Load</button>
 
-<button (click)="addSong()">Add Dummy</button>
+<section>
+  <button mat-button mat-raised-button color="primary" (click)="load()">Load</button>
+
+  <button mat-button mat-raised-button color="primary" (click)="addSong()">Add Dummy</button>
+</section>
 

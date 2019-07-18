@@ -22,3 +22,9 @@ export class GetSongs {
   constructor() {}
 }
 
+export class UpdateSong {
+  static readonly type = '[SONG] Update Song';
+
+  constructor(public payload: {prev: Song, next: Song}) {}
+}
+

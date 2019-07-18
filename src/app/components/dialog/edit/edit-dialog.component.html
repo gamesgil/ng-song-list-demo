@@ -1,0 +1,33 @@
+<h1>EDIT</h1>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Name" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Artist" [formControl]="artist" required>
+        <mat-error *ngIf="artist.invalid">{{getArtistErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="URL" [formControl]="coverUrl" required>
+        <mat-error *ngIf="coverUrl.invalid">{{getUrlErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select" [formControl]="genre" matNativeControl required>
+          <mat-option *ngFor="let option of songService.genres; let i = index" [value]="option">{{ option }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date" [value]="formatDate(date.value)" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-button mat-raised-button color="primary" (click)="onConfirm()">Confirm</button>
+      <button mat-button mat-raised-button color="secondary" (click)="close()">Cancel</button>
+
+    </div>

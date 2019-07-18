@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Song } from '../interfaces/song.interface';
-import { AddSong, RemoveSong } from '../state/actions/song.actions';
+import { AddSong, RemoveSong, UpdateSong } from '../state/actions/song.actions';
 import { Observable } from 'rxjs';
 import { SongState } from '../state/states/song.state';
 // import {  } from '../state/actions/song.actions';
@@ -12,8 +12,6 @@ import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class SongService {
-
-  songs: Song[] = [];
 
   readonly genres = ['pop', 'rap', 'hip-hop', 'alternative', 'rock'];
 
@@ -42,6 +40,10 @@ export class SongService {
 
   loadSongs() {
     this.fileService.loadDb().subscribe(songs => songs.forEach(song => this.addSong(song)));
+  }
+
+  editSong(prev: Song, next: Song) {
+    this.store.dispatch(new UpdateSong({prev, next}));
   }
 
   removeSong(name) {

@@ -4,11 +4,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FileService } from './services/file.service';
-import { SongListComponent, ConfirmDeleteComponent, EditDialogComponent } from './components/song-list/song-list.component';
+import { SongListComponent } from './components/song-list/song-list.component';
 import { SongTableComponent } from './components/song-list/song-table/song-table.component';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule, MatSortModule, MatSnackBarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule, MatFormFieldControl, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatPaginatorModule, MatSortModule, MatSnackBarModule, MatButtonModule,
+  MatDialogModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule, MatFormFieldControl,
+  MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 import { NgxsModule } from '@ngxs/store';
@@ -18,7 +20,9 @@ import { SongState } from './state/states/song.state';
 import { SongService } from './services/song.service';
 import { LoaderInterceptor } from './services/http.interceptor';
 import { LoaderService } from './services/loader.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { EditDialogComponent } from './components/dialog/edit/edit-dialog.component';
+import { ConfirmDeleteComponent } from './components/dialog/confirm/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

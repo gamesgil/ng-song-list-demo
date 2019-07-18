@@ -1,41 +1,41 @@
 <div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let row">
         {{ row.name | capitalize }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="artist">
-      <mat-header-cell *matHeaderCellDef> Artist </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Artist</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.artist }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="genre">
-      <mat-header-cell *matHeaderCellDef> Genre </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Genre</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.genre }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="coverUrl">
-      <mat-header-cell *matHeaderCellDef> URL </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>URL</mat-header-cell>
       <mat-cell *matCellDef="let row" ><a href="{{ row.coverUrl }}" target="_blank">Watch on YouTube</a></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="releaseDate">
-      <mat-header-cell *matHeaderCellDef> Release Date </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Release Date</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.releaseDate }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <button (click)="onRemoveSong(row.name)" mat-raised-button color="warn">X</button>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="edit">
-          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
           <mat-cell *matCellDef="let row">
             <button (click)="onEditSong(row.name)" mat-raised-button>...</button>
           </mat-cell>
