@@ -26,8 +26,7 @@ export class SongListComponent implements OnInit {
   }
 
   addSong() {
-    this.songService.addSong({name: 'Elektronik Supersonik', artist: 'Zlad!', genre: 'hip-hop',
-      coverUrl: 'https://www.youtube.com/watch?v=MNyG-xu-7SQ', releaseDate: 'Mar 14, 2013'});
+    this.onEditSong('');
   }
 
   onRemoveSong(name) {
@@ -44,17 +43,24 @@ export class SongListComponent implements OnInit {
   }
 
   onEditSong(name) {
-    const song = this.list.find(song => song.name === name)
+    const song = this.list.find(song => song.name === name);
 
     const dialogRef = this.dialogService.open(EditDialogComponent, {
       width: '500px',
-      data: song
+      data: song || new Song()
     });
 
 
     dialogRef.afterClosed().subscribe(data => {
       if (data.name) {
-        this.songService.editSong(song, data);
+        const existingSong = this.list.find(song => song.name === name);
+
+        if (existingSong) {
+          this.songService.editSong(song, data);
+        } else {
+          this.songService.addSong(data);
+        }
+
       }
     });
   }

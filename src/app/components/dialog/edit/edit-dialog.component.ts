@@ -16,7 +16,7 @@ export class EditDialogComponent implements OnInit {
     Validators.pattern(
       /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
       )]);
-  genre = new FormControl(this.data.genre, [Validators.required, Validators.nullValidator]);
+  genre = new FormControl(this.data.genre || this.songService.genres[0], [Validators.required, Validators.nullValidator]);
   date = new FormControl(this.data.releaseDate, [Validators.required, Validators.nullValidator]);
 
   constructor(
